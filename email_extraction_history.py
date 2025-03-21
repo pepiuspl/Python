@@ -15,25 +15,15 @@ RESET = Style.RESET_ALL
 BIG_FONT = Fore.YELLOW + Style.BRIGHT
 
 # Paths and constants
-THUNDERBIRD_PATH = r"C:\Users\tomasz.plewka\AppData\Roaming\Thunderbird\Profiles\fws18x1p.default-release\ImapMail\mail.selt.com\INBOX.sbd\2025.sbd\Zam&APM-wienia.sbd"
-SAVE_ROOT = r"M:\TECZKI KLIENTÓW"
-INTERVAL = 1  # Interval in minutes
+THUNDERBIRD_PATH = r"<path_to_Thunderbird_folder>"
+SAVE_ROOT = r"<save_path>"
+INTERVAL = 60  # Interval in minutes
 
 # Location for saving email history
-HISTORY_FILE_PATH = r"C:\Users\tomasz.plewka\desktop\Python\email_history.txt"
-
+HISTORY_FILE_PATH = r"<path_to_email_history>"
+#If the folders names are different on save path and Thunderbrd path, you can add the mapping.
 CLIENT_FOLDER_MAPPING = {
-    "ZOUNEK": "ZOUNEK DESIGN",
-    "INTERIER TENDE": "INTERIER-TENDDE-JASMIN ALIHODIC",
-    "TT GRADNJA": "TT GRADNJA",
-    "ALU_PROFI BZ": "ALU-PROFI",
-    "ALU_PROFI 2003KG": "ALU-PROFI 2003KG",
-    "BORDASROLO": "BORDASROLO KFT",
-    "RED_REL": "REDREL",
-    "ROLLSTAR": "ROLLSTAR KFT",
-    "SKM PROTECT": "SKM_PROTECT",
-    "SPANNO": "SPANNO KFT",
-    "IVPA": "IVPA OKNA",
+    "<folder_name_Thunderbird>": "<folder_name_save_path>", #After "," add another mapping
 }
 
 # Ensure the save root folder exists
@@ -139,7 +129,7 @@ def extract_order_name_from_content(content):
 def process_email(msg, processed_emails):
     """Process email to extract order number and order name from a specific sender."""
     sender = msg.get("From", "")
-    if "noreply@selt.com" not in sender:
+    if "<email>" not in sender: #complete the email address
         print(f"Skipping email from {sender}")
         return None, None  # Skip emails from other senders
     
@@ -239,7 +229,7 @@ def process_mbox(folder_path, save_root_path, last_received_date, processed_emai
     else:
         print(f"Client {client} not found in mappings! Using original client name.")
 
-    save_path = os.path.join(save_root_path, "______2025", region, client, "1_ZAMÓWIENIA")
+    save_path = os.path.join(save_root_path, "<folder_name_year>", region, client, "<folder_name_orders>")
 
     print(f"Save Path: {save_path}")
     new_email_found = False  # Track if new emails were processed
