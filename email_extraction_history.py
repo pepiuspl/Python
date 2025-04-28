@@ -129,7 +129,7 @@ def extract_order_name_from_content(content):
 def process_email(msg, processed_emails):
     """Process email to extract order number and order name from a specific sender."""
     sender = msg.get("From", "")
-    if "<email>" not in sender: #complete the email address
+    if "<email>" not in sender: #complete the email address #To be changed
         print(f"Skipping email from {sender}")
         return None, None  # Skip emails from other senders
     
