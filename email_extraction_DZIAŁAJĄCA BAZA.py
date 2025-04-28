@@ -15,23 +15,13 @@ RESET = Style.RESET_ALL
 BIG_FONT = Fore.YELLOW + Style.BRIGHT
 
 # Paths and constants
-THUNDERBIRD_PATH = r"C:\Users\tomasz.plewka\AppData\Roaming\Thunderbird\Profiles\fws18x1p.default-release\ImapMail\mail.selt.com\INBOX.sbd\2025.sbd\Zam&APM-wienia.sbd"
-SAVE_ROOT = r"C:\Users\tomasz.plewka\desktop\MailTest"
+THUNDERBIRD_PATH = r"<_thunderbird_path>" #To be changed
+SAVE_ROOT = r"<save_root>" #To be changed
 TIME_WINDOW_MINUTES = 4320
 INTERVAL = 30  # Interval in minutes
 
 CLIENT_FOLDER_MAPPING = {
-    "ZOUNEK": "ZOUNEK DESIGN",
-    "INTERIER TENDE": "INTERIER-TENDDE-JASMIN ALIHODIC",
-    "TT GRADNJA": "TT-GRADNJA",
-    "ALU_PROFI BZ": "ALU-PROFI",
-    "ALU_PROFI 2003KG": "ALU-PROFI 2003KG",
-    "BORDASROLO": "BORDASROLO KFT",
-    "RED_REL": "REDREL",
-    "ROLLSTAR": "ROLLSTAR KFT",
-    "SKM PROTECT": "SKM_PROTECT",
-    "SPANNO": "SPANNO KFT",
-    "IVPA": "IVPA OKNA",
+    "<name_in_thunderbird>": "<name_in_save_path>", #To be changed
 }
 
 # Ensure the save root folder exists
@@ -87,7 +77,7 @@ def extract_order_name_from_content(content):
 def process_email(msg):
     """Process email to extract order number and order name from specific sender."""
     sender = msg.get("From", "")
-    if "noreply@selt.com" not in sender:
+    if "<email_address_to_execute>" not in sender: #To be changed
         print(f"Skipping email from {sender}")
         return None, None  # Skip emails from other senders
     
@@ -139,7 +129,7 @@ def process_mbox(folder_path, save_root_path, time_window_minutes, processed_ema
     else:
         print(f"Client {client} not found in mappings! Using original client name.")
     
-    save_path = os.path.join(save_root_path, "______2025", region, client, "1_ZAMÓWIENIA")
+    save_path = os.path.join(save_root_path, "<save_path_folder_name>", region, client, "<orders_folder_name>") #To be changed
 
     try:
         mbox = mailbox.mbox(folder_path)
